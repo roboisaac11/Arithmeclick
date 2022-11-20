@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Idle Math Solver</title>
+    <style>
+        html {
+            background-color: black;
+            font-family: 'Lucida Console';
+            color: aqua;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            display: none;
+        }
+
+        .center {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main"
+        style="height: 98vh; width: 30%; background-color:rgb(0, 0, 0); float: left; border: 1px; border-color: rgb(73, 73, 73);">
+        <h3 style="text-align:center;">
+            <div id="name">nobody's brain</div>
+        </h3>
+        <hr>
+        <h1 style="text-align:center;">Smarts:<div id="smarts">0</div>
+        </h1>
+        <p style="text-align:center;" id="sps"><small>Per second:
+                <script>document.write(window.localStorage.getItem('persec'));</script>
+            </small></p>
+        <hr>
+        <div style="text-align:center; border-top: 25px;">
+            <br>
+            <br>
+            <h2>Question:</h2>
+            <div id="question">5+8</div>
+            <br>
+            <form onsubmit="process(this.answer.value)" name="main">
+                <input type="number" style="width: 50px; height: 25px;" name="answer" id="answer" />
+            </form>
+            <br>
+            <br>
+            <br>
+        </div>
+        <hr>
+    </div>
+    <div style="height: 98vh; width: 40%; background-color:rgb(0, 27, 27); float: left;">
+        <h3 style="text-align:center;">
+            <h4 style="float: left;" onclick="toggle('mem');">{Memory}
+        </h3>
+        <span id="updates" style="margin-left: 25px; color: rgb(255, 255, 255);">Wassup?</span>
+        <h4 style="float: right;" onclick="toggle('stats');">{Stats}</h4>
+        </h3>
+        <br>
+        <br>
+        <br>
+        <br>
+        <hr>
+        <div style="height: 85%; width: 100%; background-color: rgb(0, 32, 50); overflow-y: scroll;">
+            <div id="mem" style="display: none;">
+                <h4 style="color:red;"
+                    onclick="var yn = window.confirm('Are you sure you want to clear all your progress? This is irreversible.');if(yn == true){localStorage.clear(); window.location='/'}">
+                    {Clear save data}</h4>
+                <h4 style="color:rgb(255, 255, 255);"
+                    onclick="var name = prompt('enter new name:');window.localStorage.setItem('name', name);document.getElementById('name').innerText = window.localStorage.getItem('name')+'\'s brain'">
+                    {Change name}</h4>
+                <hr>
+            </div>
+            <div id="stats" style="display: none;">
+                <h4 style="color:rgb(255, 255, 255);">Total smarts:
+                    <script>document.write(window.localStorage.getItem('totalsmarts'));</script>
+                </h4>
+                <h4 style="color:rgb(255, 255, 255);">Total incorrect answers:
+                    <script>document.write(window.localStorage.getItem('mernts'));</script>
+                </h4>
+                <h4 style="color:rgb(255, 255, 255);">Average:
+                    <script>document.write(eval("(" + window.localStorage.getItem('totalsmarts') + "/(" + window.localStorage.getItem('totalsmarts') + "+" + window.localStorage.getItem('mernts') + "))*100"));</script>
+                    %
+                </h4>
+                <hr>
+            </div>
+            <div id="stuff">
+                <!--   what a box looks like:<div style="height: 100px; width: 100%; background-color: rgb(0, 61, 61); border-radius: 10px; border-color: black; border-width: 10;">
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div style="height: 98vh; width: 30%; background-color:rgb(0, 13, 22); float: left;">
+        <div id="upgrades">
+            <p>Upgrades:</p>
+            <hr>
+            <div id="calc" onclick="getUpgrade('calc')" class="center"
+                style="height: 75px; width: 100%; background-color: gray; border-style: solid; border-color: rgb(0, 16, 103); border-width: 5px;">
+                <img style="margin: 20px;" src="./assests/AdditionCalculator.png" width="50px" height="50px" />
+                <p style="color: black;">Small calculator</p>
+                <h3 id="calcprice" style="color: rgb(51, 51, 51); margin-left: 100px;">
+                    <script>document.write(window.localStorage.getItem("calculator"))</script> smarts
+                </h3>
+            </div>
+            <div id="grade" onclick="getUpgrade('grade')" class="center"
+                style="height: 75px; width: 100%; background-color: gray; border-style: solid; border-color: rgb(0, 16, 103); border-width: 5px;">
+                <img style="margin: 20px;" src="./assests/gradeSchoolKid.png" width="50px" height="50px" />
+                <p style="color: black;">Grade School Student</p>
+                <h3 id="gradeprice" style="color: rgb(51, 51, 51); margin-left: 100px;">
+                    <script>document.write(window.localStorage.getItem("grade-school"))</script> smarts
+                </h3>
+            </div>
+        </div>
+    </div>
+    <!--Functions-->
+    <script>
+        function toggle(ID) {
+            var element = document.getElementById(ID);
+            if (element.style.display === "none") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+        function rand(min, max) {
+            return Math.round(Math.random() * (max - min) + min);
+        }
+        function delay(time) {
+            return new Promise(resolve => setTimeout(resolve, time));
+        }
+        function getIt(name, id) {
+            document.getElementById(id).innerText = window.localStorage.getItem(name)
+        }
+        function process(value) {
+            var q = eval(document.getElementById('question').textContent)
+            if (value == q) {
+                window.localStorage.setItem('smarts', eval(window.localStorage.getItem('smarts') + "+" + window.localStorage.getItem('add')))
+                var element = document.getElementById("main");
+                window.localStorage.setItem('totalsmarts', eval(window.localStorage.getItem('totalsmarts') + "+" + window.localStorage.getItem('add')))
+                element.style.backgroundColor = 'green';
+                delay(1000).then(() => element.style.backgroundColor = 'black');
+            }
+            else {
+                var element = document.getElementById("main");
+                window.localStorage.setItem('mernts', eval(window.localStorage.getItem('mernts') + "+" + 1))
+                element.style.backgroundColor = 'red';
+                delay(1000).then(() => element.style.backgroundColor = 'black');
+            }
+        }
+
+        
+
+
+        function ApplyUpgrade(arrayOfUpgrades, arrayOfIDs, arrayOfImgs) {
+            arrayOfUpgrades.forEach(upgrade => {
+                //upgrade = toString(upgrade);
+                console.log(upgrade);
+                if (window.localStorage.getItem(upgrade) != 0 && window.localStorage.getItem(upgrade) != null) {
+                    var divID = arrayOfIDs[arrayOfUpgrades.indexOf(upgrade)]
+                    var imgs = arrayOfImgs[arrayOfUpgrades.indexOf(upgrade)]
+                    var stuff = document.getElementById("stuff");
+                    stuff.innerHTML = stuff.innerHTML + '<div id="' + divID + '" style="height: 100px; width: 100%; background-color: rgb(0, 61, 61); border-radius: 10px; border-color: black; border-width: 10; overflow: auto;"></div>';
+                    for (i = 0; i < window.localStorage.getItem(upgrade); i++) {
+                        var el = document.getElementById(divID);
+                        el.innerHTML = el.innerHTML + '<img style="margin-left: 20px; margin-right: 20px; margin-top: 10px;" src="' + imgs + '" width="25px" height="25px"/>'
+                    }
+                }
+            });
+        }
+        function buy(price, upgradeDivID, owned, storagenameid, nprice, img) {
+            localStorage.setItem("smarts", eval(localStorage.getItem("smarts") + "-" + localStorage.getItem(price)))
+            document.getElementById('smarts').innerText = Math.round(parseInt(localStorage.getItem("smarts")) * 10) / 10
+            if (eval(window.localStorage.getItem(price) > window.localStorage.getItem("smarts"))) {
+                document.getElementById(upgradeDivID).style.backgroundColor = "gray"
+            }
+            if (window.localStorage.getItem(owned) == 0 || window.localStorage.getItem(owned) == null) {
+                var stuff = document.getElementById("stuff");
+                stuff.innerHTML = stuff.innerHTML + '<div id="'+storagenameid+'" style="height: 100px; width: 100%; background-color: rgb(0, 61, 61); border-radius: 10px; border-color: black; border-width: 10; overflow: auto;">\
+                                <img style="margin-left: 20px; margin-right: 20px; margin-top: 10px;" src="'+img+'" width="25px" height="25px"/></div>';
+                window.localStorage.setItem(owned, eval(window.localStorage.getItem(owned) + "+1"))
+            }
+            else {
+                var stuff = document.getElementById(storagenameid);
+                stuff.innerHTML = stuff.innerHTML + '<img style="margin-left: 20px; margin-right: 20px; margin-top: 10px;" src="'+img+'" width="25px" height="25px"/></div>';
+                window.localStorage.setItem(owned, eval(window.localStorage.getItem(owned) + "+1"))
+            }
+            var newprice = eval("(30*" + localStorage.getItem(price) + ")/100")
+            window.localStorage.setItem(price, parseInt(localStorage.getItem(price)) + Math.round(newprice))
+            document.getElementById(nprice).innerHTML = window.localStorage.getItem(price) + ' smarts'
+            if (localStorage.getItem("persec") == 0 || localStorage.getItem("persec") == null) {
+                localStorage.setItem("persec", 0.2);
+                document.getElementById("sps").innerHTML = "<small>Per second: " + window.localStorage.getItem('persec') + "</small>"
+            }
+            else {
+                localStorage.setItem("persec", parseInt(localStorage.getItem("persec")) + eval("(2*" + localStorage.getItem(price) + ")/100"))
+                document.getElementById("sps").innerHTML = "<small>Per second: " + window.localStorage.getItem('persec') + "</small>"
+            }
+        }
+        function check(price, id) {
+            if (parseInt(localStorage.getItem("smarts")) >= parseInt(localStorage.getItem(price))) {
+                document.getElementById(id).style.backgroundColor = "aqua"
+            }
+            else {
+                document.getElementById(id).style.backgroundColor = "gray"
+            }
+        }
+    </script>
+    <!--Onload-->
+    <script>
+        var aou = ['Calcassest', 'Gradeassest'];
+        var aoid = ['calculators', 'schoolers'];
+        var aoimg = ['./assests/AdditionCalculator.png', './assests/gradeSchoolKid.png']
+        window.onload = function () {
+            document.main.answer.focus();
+            ApplyUpgrade(aou, aoid, aoimg);
+
+        }
+    </script>
+    <!--New game & localstorage-->
+    <script>
+
+        if (window.localStorage.getItem('played') == null) {
+            window.localStorage.setItem('played', true);
+            var name = prompt("Welcome to the Math idle game! Please enter a name:")
+            window.localStorage.setItem('name', name)
+            window.localStorage.setItem('smarts', 0)
+            window.localStorage.setItem('totalsmarts', 0)
+            window.localStorage.setItem('mernts', 0)
+            window.localStorage.setItem('add', 1)
+            window.localStorage.setItem('persec', 0)
+            window.localStorage.setItem('assests', [])
+            window.localStorage.setItem('calculator', 5)
+            window.localStorage.setItem('grade-school', 75)
+            // document.getElementById('name').innerText = name+"'s brain"
+            // document.getElementById('smarts').innerText = window.localStorage.getItem('smarts')
+        }
+        document.getElementById('name').innerText = window.localStorage.getItem('name') + "'s brain"
+        document.getElementById('smarts').innerText = Math.round(parseInt(localStorage.getItem("smarts")) * 10) / 10
+        var equ1 = rand(1, 10);
+        var equ2 = rand(1, 10);
+        var equ = equ1 + " + " + equ2;
+        document.getElementById('question').innerText = equ
+    </script>
+    <!--Upgrades-->
+    <script>
+        function getUpgrade(name) {
+            switch (name) {
+                case "calc":
+                    if (eval(localStorage.getItem("smarts") + ">=" + localStorage.getItem("calculator"))) {
+                        buy("calculator", "calc", "Calcassest", "calculators", "calcprice", "./assests/AdditionCalculator.png")
+                    }
+                    break;
+                case "grade":
+                if (eval(localStorage.getItem("smarts") + ">=" + localStorage.getItem("grade-school"))) {
+                    buy("grade-school", "grade", "Gradeassest", "schoolers", "gradeprice", "./assests/gradeSchoolKid.png")
+                }
+            }
+        }
+    </script>
+    <!--Persec-->
+    <script>
+        var ps = () => {
+            window.localStorage.setItem('smarts', eval(window.localStorage.getItem('smarts') + "+" + window.localStorage.getItem('persec')))
+            document.getElementById("smarts").innerText = Math.round(parseInt(localStorage.getItem("smarts")) * 10) / 10
+            check("calculator", "calc")
+            check("grade-school", "grade")
+        }
+        setInterval(ps, 1000)
+    </script>
+    <!--Greeting-->
+    <script>
+        console.warn("{-- Hey guys, Isaac here. Want a hint to get unlimited smarts?\nOK, here it is. We don't use cookies to save data, we use _________ ______!\n(Try to fill in the blanks, then you will know how to hack your smarts!)--}")
+    </script>
+
+</body>
+
+</html>
