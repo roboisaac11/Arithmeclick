@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Idle Math Solver</title>
+    <title>Arithmeclick</title>
     <style>
         html {
             background-color: black;
@@ -91,7 +91,7 @@
             </div>
         </div>
     </div>
-    <div style="height: 98vh; width: 30%; background-color:rgb(0, 13, 22); float: left;">
+    <div style="height: 98vh; width: 29%; background-color:rgb(0, 13, 22); float: left;">
         <div id="upgrades">
             <p>Upgrades:</p>
             <hr>
@@ -103,12 +103,22 @@
                     <script>document.write(window.localStorage.getItem("calculator"))</script> smarts
                 </h3>
             </div>
+            <hr>
             <div id="grade" onclick="getUpgrade('grade')" class="center"
                 style="height: 75px; width: 100%; background-color: gray; border-style: solid; border-color: rgb(0, 16, 103); border-width: 5px;">
                 <img style="margin: 20px;" src="./assests/gradeSchoolKid.png" width="50px" height="50px" />
                 <p style="color: black;">Grade School Student</p>
                 <h3 id="gradeprice" style="color: rgb(51, 51, 51); margin-left: 100px;">
                     <script>document.write(window.localStorage.getItem("grade-school"))</script> smarts
+                </h3>
+            </div>
+            <hr>
+            <div id="univ" onclick="getUpgrade('univ')" class="center"
+                style="height: 75px; width: 100%; background-color: gray; border-style: solid; border-color: rgb(0, 16, 103); border-width: 5px;">
+                <img style="margin: 20px;" src="./assests/univercityKid.png" width="50px" height="50px" />
+                <p style="color: black;">Univercity Student</p>
+                <h3 id="univprice" style="color: rgb(51, 51, 51); margin-left: 100px;">
+                    <script>document.write(window.localStorage.getItem("univercity"))</script> smarts
                 </h3>
             </div>
         </div>
@@ -155,12 +165,11 @@
         function ApplyUpgrade(arrayOfUpgrades, arrayOfIDs, arrayOfImgs) {
             arrayOfUpgrades.forEach(upgrade => {
                 //upgrade = toString(upgrade);
-                console.log(upgrade);
                 if (window.localStorage.getItem(upgrade) != 0 && window.localStorage.getItem(upgrade) != null) {
                     var divID = arrayOfIDs[arrayOfUpgrades.indexOf(upgrade)]
                     var imgs = arrayOfImgs[arrayOfUpgrades.indexOf(upgrade)]
                     var stuff = document.getElementById("stuff");
-                    stuff.innerHTML = stuff.innerHTML + '<div id="' + divID + '" style="height: 100px; width: 100%; background-color: rgb(0, 61, 61); border-radius: 10px; border-color: black; border-width: 10; overflow: auto;"></div>';
+                    stuff.innerHTML = stuff.innerHTML + '<div id="' + divID + '" style="height: 100px; width: 100%; background-color: rgb(0, 61, 61); border-radius: 10px; border-color: black; border-width: 10; overflow: auto;"></div><hr>';
                     for (i = 0; i < window.localStorage.getItem(upgrade); i++) {
                         var el = document.getElementById(divID);
                         el.innerHTML = el.innerHTML + '<img style="margin-left: 20px; margin-right: 20px; margin-top: 10px;" src="' + imgs + '" width="25px" height="25px"/>'
@@ -168,7 +177,7 @@
                 }
             });
         }
-        function buy(price, upgradeDivID, owned, storagenameid, nprice, img) {
+        function buy(price, upgradeDivID, owned, storagenameid, nprice, img, percent) {
             localStorage.setItem("smarts", eval(localStorage.getItem("smarts") + "-" + localStorage.getItem(price)))
             document.getElementById('smarts').innerText = Math.round(parseInt(localStorage.getItem("smarts")) * 10) / 10
             if (eval(window.localStorage.getItem(price) > window.localStorage.getItem("smarts"))) {
@@ -177,7 +186,7 @@
             if (window.localStorage.getItem(owned) == 0 || window.localStorage.getItem(owned) == null) {
                 var stuff = document.getElementById("stuff");
                 stuff.innerHTML = stuff.innerHTML + '<div id="'+storagenameid+'" style="height: 100px; width: 100%; background-color: rgb(0, 61, 61); border-radius: 10px; border-color: black; border-width: 10; overflow: auto;">\
-                                <img style="margin-left: 20px; margin-right: 20px; margin-top: 10px;" src="'+img+'" width="25px" height="25px"/></div>';
+                                <img style="margin-left: 20px; margin-right: 20px; margin-top: 10px;" src="'+img+'" width="25px" height="25px"/></div><hr>';
                 window.localStorage.setItem(owned, eval(window.localStorage.getItem(owned) + "+1"))
             }
             else {
@@ -193,7 +202,7 @@
                 document.getElementById("sps").innerHTML = "<small>Per second: " + window.localStorage.getItem('persec') + "</small>"
             }
             else {
-                localStorage.setItem("persec", parseInt(localStorage.getItem("persec")) + eval("(2*" + localStorage.getItem(price) + ")/100"))
+                localStorage.setItem("persec", parseInt(localStorage.getItem("persec")) + eval("("+percent+"*" + localStorage.getItem(price) + ")/100"))
                 document.getElementById("sps").innerHTML = "<small>Per second: " + window.localStorage.getItem('persec') + "</small>"
             }
         }
@@ -208,9 +217,9 @@
     </script>
     <!--Onload-->
     <script>
-        var aou = ['Calcassest', 'Gradeassest'];
-        var aoid = ['calculators', 'schoolers'];
-        var aoimg = ['./assests/AdditionCalculator.png', './assests/gradeSchoolKid.png']
+        var aou = ['Calcassest', 'Gradeassest', 'Univassest'];
+        var aoid = ['calculators', 'schoolers', 'univercers'];
+        var aoimg = ['./assests/AdditionCalculator.png', './assests/gradeSchoolKid.png', './assests/univercityKid.png']
         window.onload = function () {
             document.main.answer.focus();
             ApplyUpgrade(aou, aoid, aoimg);
@@ -231,7 +240,8 @@
             window.localStorage.setItem('persec', 0)
             window.localStorage.setItem('assests', [])
             window.localStorage.setItem('calculator', 5)
-            window.localStorage.setItem('grade-school', 75)
+            window.localStorage.setItem('grade-school', 50)
+            window.localStorage.setItem('univercity', 10000)
             // document.getElementById('name').innerText = name+"'s brain"
             // document.getElementById('smarts').innerText = window.localStorage.getItem('smarts')
         }
@@ -248,13 +258,19 @@
             switch (name) {
                 case "calc":
                     if (eval(localStorage.getItem("smarts") + ">=" + localStorage.getItem("calculator"))) {
-                        buy("calculator", "calc", "Calcassest", "calculators", "calcprice", "./assests/AdditionCalculator.png")
+                        buy("calculator", "calc", "Calcassest", "calculators", "calcprice", "./assests/AdditionCalculator.png", 5)
                     }
                     break;
                 case "grade":
-                if (eval(localStorage.getItem("smarts") + ">=" + localStorage.getItem("grade-school"))) {
-                    buy("grade-school", "grade", "Gradeassest", "schoolers", "gradeprice", "./assests/gradeSchoolKid.png")
-                }
+                    if (eval(localStorage.getItem("smarts") + ">=" + localStorage.getItem("grade-school"))) {
+                        buy("grade-school", "grade", "Gradeassest", "schoolers", "gradeprice", "./assests/gradeSchoolKid.png", 7)
+                    }
+                    break;
+                case "univ":
+                    if (eval(localStorage.getItem("smarts") + ">=" + localStorage.getItem("univercity"))) {
+                        buy("univercity", "univ", "Univassest", "univercers", "univprice", "./assests/univercityKid.png", 10)
+                    }
+                    break;
             }
         }
     </script>
@@ -265,6 +281,7 @@
             document.getElementById("smarts").innerText = Math.round(parseInt(localStorage.getItem("smarts")) * 10) / 10
             check("calculator", "calc")
             check("grade-school", "grade")
+            check("univercity", "univ")
         }
         setInterval(ps, 1000)
     </script>
