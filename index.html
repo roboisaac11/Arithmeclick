@@ -49,6 +49,9 @@
             <br>
         </div>
         <hr>
+        <div>
+            <img id="brain" src="./assests/brain.jpg" width="50px" height="25px"/>
+        </div>
     </div>
     <div style="height: 98vh; width: 40%; background-color:rgb(0, 27, 27); float: left;">
         <h3 style="text-align:center;">
@@ -145,9 +148,19 @@
         function process(value) {
             var q = eval(document.getElementById('question').textContent)
             if (value == q) {
+                var hmm = parseInt(localStorage.getItem("totalsmarts"))
+                if(hmm >= 10){localStorage.setItem('add', 3)}
+                if(hmm >= 50){localStorage.setItem('add', 5)}
+                if(hmm >= 100){localStorage.setItem('add', 20)}
+                if(hmm >= 125){localStorage.setItem('add', 23)}
+                if(hmm >= 150){localStorage.setItem('add', 25)}
+                if(hmm >= 175){localStorage.setItem('add', 30)}
+                if(hmm >= 200){localStorage.setItem('add', 33)}
+
+                //localStorage.setItem('add', localStorage.getItem('totalsmarts'))
                 window.localStorage.setItem('smarts', eval(window.localStorage.getItem('smarts') + "+" + window.localStorage.getItem('add')))
                 var element = document.getElementById("main");
-                window.localStorage.setItem('totalsmarts', eval(window.localStorage.getItem('totalsmarts') + "+" + window.localStorage.getItem('add')))
+                window.localStorage.setItem('totalsmarts', eval(window.localStorage.getItem('totalsmarts') + "+1"))
                 element.style.backgroundColor = 'green';
                 delay(1000).then(() => element.style.backgroundColor = 'black');
             }
@@ -159,7 +172,7 @@
             }
         }
 
-        
+
 
 
         function ApplyUpgrade(arrayOfUpgrades, arrayOfIDs, arrayOfImgs) {
@@ -177,7 +190,7 @@
                 }
             });
         }
-        function buy(price, upgradeDivID, owned, storagenameid, nprice, img, percent) {
+        function buy(price, upgradeDivID, owned, storagenameid, nprice, img, add) {
             localStorage.setItem("smarts", eval(localStorage.getItem("smarts") + "-" + localStorage.getItem(price)))
             document.getElementById('smarts').innerText = Math.round(parseInt(localStorage.getItem("smarts")) * 10) / 10
             if (eval(window.localStorage.getItem(price) > window.localStorage.getItem("smarts"))) {
@@ -185,16 +198,16 @@
             }
             if (window.localStorage.getItem(owned) == 0 || window.localStorage.getItem(owned) == null) {
                 var stuff = document.getElementById("stuff");
-                stuff.innerHTML = stuff.innerHTML + '<div id="'+storagenameid+'" style="height: 100px; width: 100%; background-color: rgb(0, 61, 61); border-radius: 10px; border-color: black; border-width: 10; overflow: auto;">\
-                                <img style="margin-left: 20px; margin-right: 20px; margin-top: 10px;" src="'+img+'" width="25px" height="25px"/></div><hr>';
+                stuff.innerHTML = stuff.innerHTML + '<div id="' + storagenameid + '" style="height: 100px; width: 100%; background-color: rgb(0, 61, 61); border-radius: 10px; border-color: black; border-width: 10; overflow: auto;">\
+                                <img style="margin-left: 20px; margin-right: 20px; margin-top: 10px;" src="'+ img + '" width="25px" height="25px"/></div><hr>';
                 window.localStorage.setItem(owned, eval(window.localStorage.getItem(owned) + "+1"))
             }
             else {
                 var stuff = document.getElementById(storagenameid);
-                stuff.innerHTML = stuff.innerHTML + '<img style="margin-left: 20px; margin-right: 20px; margin-top: 10px;" src="'+img+'" width="25px" height="25px"/></div>';
+                stuff.innerHTML = stuff.innerHTML + '<img style="margin-left: 20px; margin-right: 20px; margin-top: 10px;" src="' + img + '" width="25px" height="25px"/></div>';
                 window.localStorage.setItem(owned, eval(window.localStorage.getItem(owned) + "+1"))
             }
-            var newprice = eval("(30*" + localStorage.getItem(price) + ")/100")
+            var newprice = eval("(50*" + localStorage.getItem(price) + ")/100")
             window.localStorage.setItem(price, parseInt(localStorage.getItem(price)) + Math.round(newprice))
             document.getElementById(nprice).innerHTML = window.localStorage.getItem(price) + ' smarts'
             if (localStorage.getItem("persec") == 0 || localStorage.getItem("persec") == null) {
@@ -202,7 +215,7 @@
                 document.getElementById("sps").innerHTML = "<small>Per second: " + window.localStorage.getItem('persec') + "</small>"
             }
             else {
-                localStorage.setItem("persec", parseInt(localStorage.getItem("persec")) + eval("("+percent+"*" + localStorage.getItem(price) + ")/100"))
+                localStorage.setItem("persec", parseFloat(localStorage.getItem("persec")) + add)
                 document.getElementById("sps").innerHTML = "<small>Per second: " + window.localStorage.getItem('persec') + "</small>"
             }
         }
@@ -223,7 +236,8 @@
         window.onload = function () {
             document.main.answer.focus();
             ApplyUpgrade(aou, aoid, aoimg);
-
+            document.getElementById("brain").style.width = ((parseInt(localStorage.getItem("totalsmarts"))/3)*2)+"px"
+            document.getElementById("brain").style.height = (parseInt(localStorage.getItem("totalsmarts"))/3)+"px"
         }
     </script>
     <!--New game & localstorage-->
@@ -258,17 +272,17 @@
             switch (name) {
                 case "calc":
                     if (eval(localStorage.getItem("smarts") + ">=" + localStorage.getItem("calculator"))) {
-                        buy("calculator", "calc", "Calcassest", "calculators", "calcprice", "./assests/AdditionCalculator.png", 5)
+                        buy("calculator", "calc", "Calcassest", "calculators", "calcprice", "./assests/AdditionCalculator.png", 0.2)
                     }
                     break;
                 case "grade":
                     if (eval(localStorage.getItem("smarts") + ">=" + localStorage.getItem("grade-school"))) {
-                        buy("grade-school", "grade", "Gradeassest", "schoolers", "gradeprice", "./assests/gradeSchoolKid.png", 7)
+                        buy("grade-school", "grade", "Gradeassest", "schoolers", "gradeprice", "./assests/gradeSchoolKid.png", 1)
                     }
                     break;
                 case "univ":
                     if (eval(localStorage.getItem("smarts") + ">=" + localStorage.getItem("univercity"))) {
-                        buy("univercity", "univ", "Univassest", "univercers", "univprice", "./assests/univercityKid.png", 10)
+                        buy("univercity", "univ", "Univassest", "univercers", "univprice", "./assests/univercityKid.png", 3)
                     }
                     break;
             }
