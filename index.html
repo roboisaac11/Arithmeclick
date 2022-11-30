@@ -124,6 +124,15 @@
                     <script>document.write(window.localStorage.getItem("univercity"))</script> smarts
                 </h3>
             </div>
+            <hr>
+            <div id="teach" onclick="getUpgrade('teach')" class="center"
+                style="height: 75px; width: 100%; background-color: gray; border-style: solid; border-color: rgb(0, 16, 103); border-width: 5px;">
+                <img style="margin: 20px;" src="./assests/teacher.png" width="50px" height="50px" />
+                <p style="color: black;">Teacher</p>
+                <h3 id="teachprice" style="color: rgb(51, 51, 51); margin-left: 100px;">
+                    <script>if(window.localStorage.getItem("teacher") != null){document.write(window.localStorage.getItem("teacher"))}else{window.localStorage.setItem('teacher', 100000);document.write(window.localStorage.getItem("teacher"))}</script> smarts
+                </h3>
+            </div>
         </div>
     </div>
     <!--Functions-->
@@ -146,6 +155,11 @@
             document.getElementById(id).innerText = window.localStorage.getItem(name)
         }
         function process(value) {
+
+            console.log(value);
+            if(value == ''){
+                return
+            }
             var q = eval(document.getElementById('question').textContent)
             if (value == q) {
                 var hmm = parseInt(localStorage.getItem("totalsmarts"))
@@ -230,9 +244,9 @@
     </script>
     <!--Onload-->
     <script>
-        var aou = ['Calcassest', 'Gradeassest', 'Univassest'];
-        var aoid = ['calculators', 'schoolers', 'univercers'];
-        var aoimg = ['./assests/AdditionCalculator.png', './assests/gradeSchoolKid.png', './assests/univercityKid.png']
+        var aou = ['Calcassest', 'Gradeassest', 'Univassest', 'Teachassest'];
+        var aoid = ['calculators', 'schoolers', 'univercers', 'teachers'];
+        var aoimg = ['./assests/AdditionCalculator.png', './assests/gradeSchoolKid.png', './assests/univercityKid.png', "./assests/teacher.png"]
         window.onload = function () {
             document.main.answer.focus();
             ApplyUpgrade(aou, aoid, aoimg);
@@ -242,10 +256,9 @@
     </script>
     <!--New game & localstorage-->
     <script>
-
         if (window.localStorage.getItem('played') == null) {
             window.localStorage.setItem('played', true);
-            var name = prompt("Welcome to the Math idle game! Please enter a name:")
+            var name = prompt("Welcome to Arithmeclick! Please enter a name:")
             window.localStorage.setItem('name', name)
             window.localStorage.setItem('smarts', 0)
             window.localStorage.setItem('totalsmarts', 0)
@@ -256,6 +269,7 @@
             window.localStorage.setItem('calculator', 5)
             window.localStorage.setItem('grade-school', 50)
             window.localStorage.setItem('univercity', 10000)
+            window.localStorage.setItem('teacher', 100000)
             // document.getElementById('name').innerText = name+"'s brain"
             // document.getElementById('smarts').innerText = window.localStorage.getItem('smarts')
         }
@@ -285,6 +299,11 @@
                         buy("univercity", "univ", "Univassest", "univercers", "univprice", "./assests/univercityKid.png", 5)
                     }
                     break;
+                case "teach":
+                    if (eval(localStorage.getItem("smarts") + ">=" + localStorage.getItem("teacher"))) {
+                        buy("teacher", "teach", "Teachassest", "teachers", "teachprice", "./assests/teacher.png", 6.5)
+                    }
+                    break;
             }
         }
     </script>
@@ -296,14 +315,10 @@
             check("calculator", "calc")
             check("grade-school", "grade")
             check("univercity", "univ")
+            check("teacher", "teach")
         }
         setInterval(ps, 1000)
     </script>
-    <!--Greeting-->
-    <script>
-        console.warn("{-- Hey guys, Isaac here. Want a hint to get unlimited smarts?\nOK, here it is. We don't use cookies to save data, we use _________ ______!\n(Try to fill in the blanks, then you will know how to hack your smarts!)--}")
-    </script>
-
 </body>
 
 </html>
