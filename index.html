@@ -133,8 +133,24 @@
                     <script>if(window.localStorage.getItem("teacher") != null){document.write(window.localStorage.getItem("teacher"))}else{window.localStorage.setItem('teacher', 100000);document.write(window.localStorage.getItem("teacher"))}</script> smarts
                 </h3>
             </div>
+            <hr>
+            <div id="prof" onclick="getUpgrade('prof')" class="center"
+                style="height: 75px; width: 100%; background-color: gray; border-style: solid; border-color: rgb(0, 16, 103); border-width: 5px;">
+                <img style="margin: 20px;" src="./assests/professor.png" width="50px" height="50px" />
+                <p style="color: black;">Professor</p>
+                <h3 id="teachprice" style="color: rgb(51, 51, 51); margin-left: 100px;">
+                    <script>if(window.localStorage.getItem("professor") != null){document.write(window.localStorage.getItem("professor"))}else{window.localStorage.setItem('professor', 1005000);document.write(window.localStorage.getItem("professor"))}</script> smarts
+                </h3>
+            </div>
         </div>
     </div>
+
+
+
+    <!--Scripts-->
+
+
+
     <!--Functions-->
     <script>
         function toggle(ID) {
@@ -170,6 +186,10 @@
                 if(hmm >= 150){localStorage.setItem('add', 25)}
                 if(hmm >= 175){localStorage.setItem('add', 30)}
                 if(hmm >= 200){localStorage.setItem('add', 33)}
+                
+                // adds your average percent correct from what is being added, to what is being added. e.g. if ur average is 100%, and
+                // it's adding 5, it adds 10. (100% of 5 is 5, 5+5=10)
+                var addNow = (parseInt(localStorage.getItem('add'))*eval("(" + window.localStorage.getItem('totalsmarts') + "/(" + window.localStorage.getItem('totalsmarts') + "+" + window.localStorage.getItem('mernts') + "))*100"))+parseInt(localStorage.getItem('add'))
 
                 //localStorage.setItem('add', localStorage.getItem('totalsmarts'))
                 window.localStorage.setItem('smarts', eval(window.localStorage.getItem('smarts') + "+" + window.localStorage.getItem('add')))
@@ -225,7 +245,7 @@
             window.localStorage.setItem(price, parseInt(localStorage.getItem(price)) + Math.round(newprice))
             document.getElementById(nprice).innerHTML = window.localStorage.getItem(price) + ' smarts'
             if (localStorage.getItem("persec") == 0 || localStorage.getItem("persec") == null) {
-                localStorage.setItem("persec", 0.2);
+                localStorage.setItem("persec", add);
                 document.getElementById("sps").innerHTML = "<small>Per second: " + window.localStorage.getItem('persec') + "</small>"
             }
             else {
@@ -244,9 +264,9 @@
     </script>
     <!--Onload-->
     <script>
-        var aou = ['Calcassest', 'Gradeassest', 'Univassest', 'Teachassest'];
-        var aoid = ['calculators', 'schoolers', 'univercers', 'teachers'];
-        var aoimg = ['./assests/AdditionCalculator.png', './assests/gradeSchoolKid.png', './assests/univercityKid.png', "./assests/teacher.png"]
+        var aou = ['Calcassest', 'Gradeassest', 'Univassest', 'Teachassest', 'Profassest'];
+        var aoid = ['calculators', 'schoolers', 'univercers', 'teachers', 'professors'];
+        var aoimg = ['./assests/AdditionCalculator.png', './assests/gradeSchoolKid.png', './assests/univercityKid.png', "./assests/teacher.png", "./assests/professor.png"]
         window.onload = function () {
             document.main.answer.focus();
             ApplyUpgrade(aou, aoid, aoimg);
@@ -270,6 +290,7 @@
             window.localStorage.setItem('grade-school', 50)
             window.localStorage.setItem('univercity', 10000)
             window.localStorage.setItem('teacher', 100000)
+            window.localStorage.setItem('professor', 1005000)
             // document.getElementById('name').innerText = name+"'s brain"
             // document.getElementById('smarts').innerText = window.localStorage.getItem('smarts')
         }
@@ -304,6 +325,11 @@
                         buy("teacher", "teach", "Teachassest", "teachers", "teachprice", "./assests/teacher.png", 6.5)
                     }
                     break;
+                case "prof":
+                    if (eval(localStorage.getItem("smarts") + ">=" + localStorage.getItem("professor"))) {
+                        buy("professor", "prof", "Profassest", "professors", "profprice", "./assests/professor.png", 7.3)
+                    }
+                    break;
             }
         }
     </script>
@@ -316,6 +342,7 @@
             check("grade-school", "grade")
             check("univercity", "univ")
             check("teacher", "teach")
+            check("professor", "prof")
         }
         setInterval(ps, 1000)
     </script>
