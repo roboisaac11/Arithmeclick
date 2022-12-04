@@ -182,11 +182,15 @@
     <!--Cheat codes :)-->
     <script>
         class Codes{
+            constructor(){
+                var stuff = "This is some stuff";
+            }
             solve(amount){
                 localStorage.setItem('smarts', parseFloat(localStorage.getItem('smarts'))+amount);
                 document.getElementById('smarts').innerText = localStorage.getItem('smarts');
             }
         }
+        var Cheat = new Codes()
     </script>
     <!--Functions-->
     <script>
