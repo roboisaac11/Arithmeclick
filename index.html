@@ -156,7 +156,16 @@
                 <img style="margin: 20px;" src="./assests/quantumcomputer.png" width="50px" height="50px" />
                 <p style="color: black;">Quantum<br>Computer</p>
                 <h3 id="quantprice" style="color: rgb(51, 51, 51); margin-left: 50px;">
-                    <script>if(window.localStorage.getItem("quantumcomputer") != null){document.write(window.localStorage.getItem("quantumcomputer"))}else{window.localStorage.setItem('quantumcomputer', 11500000);document.write(window.localStorage.getItem("quantumcomputer"))}</script><br> smarts
+                    <script>if(window.localStorage.getItem("quantumcomputer") != null){document.write(window.localStorage.getItem("quantumcomputer"))}else{window.localStorage.setItem('quantumcomputer', 11000000);document.write(window.localStorage.getItem("quantumcomputer"))}</script><br> smarts
+                </h3>
+            </div>
+            <hr>
+            <div id="lab" onclick="getUpgrade('lab')" class="center"
+                style="height: 75px; width: 100%; background-color: gray; border-style: solid; border-color: rgb(0, 16, 103); border-width: 5px;">
+                <img style="margin: 20px;" src="./assests/mathlab.png" width="50px" height="50px" />
+                <p style="color: black;">Math Lab</p>
+                <h3 id="labprice" style="color: rgb(51, 51, 51); margin-left: 50px;">
+                    <script>if(window.localStorage.getItem("mathlab") != null){document.write(window.localStorage.getItem("mathlab"))}else{window.localStorage.setItem('mathlab', 15520000);document.write(window.localStorage.getItem("mathlab"))}</script><br> smarts
                 </h3>
             </div>
         </div>
@@ -249,7 +258,7 @@
             }
             if (window.localStorage.getItem(owned) == 0 || window.localStorage.getItem(owned) == null) {
                 var stuff = document.getElementById("stuff");
-                stuff.innerHTML = stuff.innerHTML + '<div id="' + storagenameid + '" style="height: 100px; width: 100%; background-color: rgb(0, 61, 61); border-radius: 10px; border-color: black; border-width: 10; overflow: auto;">\
+                stuff.innerHTML = stuff.innerHTML + '<div id="' + storagenameid + '" style="height: 100px; width: 100%; background-color: rgb(0, 61, 61); border-radius: 10px; border-color: black; border-width: 10; overflow: hidden;">\
                                 <img style="margin-left: 20px; margin-right: 20px; margin-top: 10px;" src="'+ img + '" width="25px" height="25px"/></div><hr>';
                 window.localStorage.setItem(owned, eval(window.localStorage.getItem(owned) + "+1"))
             }
@@ -274,9 +283,9 @@
     </script>
     <!--Onload-->
     <script>
-        var aou = ['Calcassest', 'Gradeassest', 'Univassest', 'Teachassest', 'Profassest', 'Superassest', 'Quantassest'];
-        var aoid = ['calculators', 'schoolers', 'univercers', 'teachers', 'professors', 'supercomputers', 'quantumcomputers'];
-        var aoimg = ['./assests/AdditionCalculator.png', './assests/gradeSchoolKid.png', './assests/univercityKid.png', "./assests/teacher.png", "./assests/professor.png", "./assests/supercomputer.png", "./assests/quantumcomputer.png"]
+        var aou = ['Calcassest', 'Gradeassest', 'Univassest', 'Teachassest', 'Profassest', 'Superassest', 'Quantassest', 'Labassest'];
+        var aoid = ['calculators', 'schoolers', 'univercers', 'teachers', 'professors', 'supercomputers', 'quantumcomputers', 'mathlabs'];
+        var aoimg = ['./assests/AdditionCalculator.png', './assests/gradeSchoolKid.png', './assests/univercityKid.png', "./assests/teacher.png", "./assests/professor.png", "./assests/supercomputer.png", "./assests/quantumcomputer.png", "./assests/mathlab.png"]
         window.onload = function () {
             document.main.answer.focus();
             ApplyUpgrade(aou, aoid, aoimg);
@@ -302,7 +311,8 @@
             window.localStorage.setItem('teacher', 100000)
             window.localStorage.setItem('professor', 1005000)
             window.localStorage.setItem('supercomputer', 8500000);
-            window.localStorage.setItem('quantumcomputer', 11500000)
+            window.localStorage.setItem('quantumcomputer', 11500000);
+            window.localStorage.setItem('mathlab', 15520000);            
         }
         document.getElementById('name').innerText = window.localStorage.getItem('name') + "'s brain"
         document.getElementById('smarts').innerText = Math.round(parseInt(localStorage.getItem("smarts")) * 10) / 10
@@ -346,8 +356,13 @@
                     }
                     break;    
                 case "quant":
-                    if (eval(localStorage.getItem("smarts") + ">=" + localStorage.getItem("supercomputer"))) {
+                    if (eval(localStorage.getItem("smarts") + ">=" + localStorage.getItem("quantumcomputer"))) {
                         buy("quantumcomputer", "quant", "Quantassest", "quantumcomputers", "quantprice", "./assests/quantumcomputer.png", 12)
+                    }       
+                    break;
+                case "lab":
+                    if (eval(localStorage.getItem("smarts") + ">=" + localStorage.getItem("mathlab"))) {
+                        buy("mathlab", "lab", "Labassest", "mathlabs", "labprice", "./assests/mathlab.png", 14.3)
                     }       
                     break;
             }
@@ -364,6 +379,8 @@
             check("teacher", "teach")
             check("professor", "prof")
             check("supercomputer", "super")
+            check("quantumcomputer", "quant")
+            check("mathlab", "lab")
         }
         setInterval(ps, 1000)
     </script>
