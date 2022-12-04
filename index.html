@@ -23,8 +23,7 @@
 </head>
 
 <body>
-    <div id="main"
-        style="height: 98vh; width: 30%; background-color:rgb(0, 0, 0); float: left; border: 1px; border-color: rgb(73, 73, 73);">
+    <div id="main" style="height: 98vh; width: 30%; background-color:rgb(0, 0, 0); float: left; border: 1px; border-color: rgb(73, 73, 73);">
         <h3 style="text-align:center;">
             <div id="name">nobody's brain</div>
         </h3>
@@ -53,7 +52,7 @@
             <img id="brain" src="./assests/brain.jpg" width="50px" height="25px"/>
         </div>
     </div>
-    <div style="height: 98vh; width: 40%; background-color:rgb(0, 27, 27); float: left;">
+    <div style="height: 98vh; width: 35%; background-color:rgb(0, 27, 27); float: left;">
         <h3 style="text-align:center;">
             <h4 style="float: left;" onclick="toggle('mem');">{Memory}
         </h3>
@@ -94,62 +93,76 @@
             </div>
         </div>
     </div>
-    <div style="height: 98vh; width: 29%; background-color:rgb(0, 13, 22); float: left;">
-        <div id="upgrades">
-            <p>Upgrades:</p>
-            <hr>
+    <div style="height: 98vh; width: 34%; background-color:rgb(0, 13, 22); float: left;">
+        <p>Upgrades:</p>
+        <div style="height: 93%; overflow-y: scroll; overflow-x: hidden;" id="upgrades">
+            <hr> 
             <div id="calc" onclick="getUpgrade('calc')" class="center"
                 style="height: 75px; width: 100%; background-color: gray; border-style: solid; border-color: rgb(0, 16, 103); border-width: 5px;">
                 <img style="margin: 20px;" src="./assests/AdditionCalculator.png" width="50px" height="50px" />
-                <p style="color: black;">Small calculator</p>
-                <h3 id="calcprice" style="color: rgb(51, 51, 51); margin-left: 100px;">
-                    <script>document.write(window.localStorage.getItem("calculator"))</script> smarts
+                <p style="color: black;">Small<br>calculator</p>
+                <h3 id="calcprice" style="color: rgb(51, 51, 51); margin-left: 50px;">
+                    <script>document.write(window.localStorage.getItem("calculator"))</script><br> smarts
                 </h3>
             </div>
             <hr>
             <div id="grade" onclick="getUpgrade('grade')" class="center"
                 style="height: 75px; width: 100%; background-color: gray; border-style: solid; border-color: rgb(0, 16, 103); border-width: 5px;">
                 <img style="margin: 20px;" src="./assests/gradeSchoolKid.png" width="50px" height="50px" />
-                <p style="color: black;">Grade School Student</p>
-                <h3 id="gradeprice" style="color: rgb(51, 51, 51); margin-left: 100px;">
-                    <script>document.write(window.localStorage.getItem("grade-school"))</script> smarts
+                <p style="color: black;">Grade-School<br>Student</p>
+                <h3 id="gradeprice" style="color: rgb(51, 51, 51); margin-left: 50px;">
+                    <script>document.write(window.localStorage.getItem("grade-school"))</script> <br>smarts
                 </h3>
             </div>
             <hr>
             <div id="univ" onclick="getUpgrade('univ')" class="center"
                 style="height: 75px; width: 100%; background-color: gray; border-style: solid; border-color: rgb(0, 16, 103); border-width: 5px;">
                 <img style="margin: 20px;" src="./assests/univercityKid.png" width="50px" height="50px" />
-                <p style="color: black;">University Student</p>
-                <h3 id="univprice" style="color: rgb(51, 51, 51); margin-left: 100px;">
-                    <script>document.write(window.localStorage.getItem("univercity"))</script> smarts
+                <p style="color: black;">University<br>Student</p>
+                <h3 id="univprice" style="color: rgb(51, 51, 51); margin-left: 30px;">
+                    <script>document.write(window.localStorage.getItem("univercity"))</script><br> smarts
                 </h3>
             </div>
             <hr>
             <div id="teach" onclick="getUpgrade('teach')" class="center"
                 style="height: 75px; width: 100%; background-color: gray; border-style: solid; border-color: rgb(0, 16, 103); border-width: 5px;">
                 <img style="margin: 20px;" src="./assests/teacher.png" width="50px" height="50px" />
-                <p style="color: black;">Teacher</p>
-                <h3 id="teachprice" style="color: rgb(51, 51, 51); margin-left: 100px;">
-                    <script>if(window.localStorage.getItem("teacher") != null){document.write(window.localStorage.getItem("teacher"))}else{window.localStorage.setItem('teacher', 100000);document.write(window.localStorage.getItem("teacher"))}</script> smarts
+                <p style="color: black;">Teacher<br></p>
+                <h3 id="teachprice" style="color: rgb(51, 51, 51); margin-left: 50px;">
+                    <script>if(window.localStorage.getItem("teacher") != null){document.write(window.localStorage.getItem("teacher"))}else{window.localStorage.setItem('teacher', 100000);document.write(window.localStorage.getItem("teacher"))}</script><br> smarts
                 </h3>
             </div>
             <hr>
             <div id="prof" onclick="getUpgrade('prof')" class="center"
                 style="height: 75px; width: 100%; background-color: gray; border-style: solid; border-color: rgb(0, 16, 103); border-width: 5px;">
                 <img style="margin: 20px;" src="./assests/professor.png" width="50px" height="50px" />
-                <p style="color: black;">Professor</p>
-                <h3 id="teachprice" style="color: rgb(51, 51, 51); margin-left: 100px;">
-                    <script>if(window.localStorage.getItem("professor") != null){document.write(window.localStorage.getItem("professor"))}else{window.localStorage.setItem('professor', 1005000);document.write(window.localStorage.getItem("professor"))}</script> smarts
+                <p style="color: black;">Professor<br></p>
+                <h3 id="teachprice" style="color: rgb(51, 51, 51); margin-left: 50px;">
+                    <script>if(window.localStorage.getItem("professor") != null){document.write(window.localStorage.getItem("professor"))}else{window.localStorage.setItem('professor', 1005000);document.write(window.localStorage.getItem("professor"))}</script><br> smarts
+                </h3>
+            </div>
+            <hr>
+            <div id="super" onclick="getUpgrade('super')" class="center"
+                style="height: 75px; width: 100%; background-color: gray; border-style: solid; border-color: rgb(0, 16, 103); border-width: 5px;">
+                <img style="margin: 20px;" src="./assests/supercomputer.png" width="50px" height="50px" />
+                <p style="color: black;">Super<br>Computer</p>
+                <h3 id="superprice" style="color: rgb(51, 51, 51); margin-left: 50px;">
+                    <script>if(window.localStorage.getItem("supercomputer") != null){document.write(window.localStorage.getItem("supercomputer"))}else{window.localStorage.setItem('supercomputer', 8500000);document.write(window.localStorage.getItem("supercomputer"))}</script><br> smarts
+                </h3>
+            </div>
+            <hr>
+            <div id="quant" onclick="getUpgrade('quant')" class="center"
+                style="height: 75px; width: 100%; background-color: gray; border-style: solid; border-color: rgb(0, 16, 103); border-width: 5px;">
+                <img style="margin: 20px;" src="./assests/quantumcomputer.png" width="50px" height="50px" />
+                <p style="color: black;">Quantum<br>Computer</p>
+                <h3 id="quantprice" style="color: rgb(51, 51, 51); margin-left: 50px;">
+                    <script>if(window.localStorage.getItem("quantumcomputer") != null){document.write(window.localStorage.getItem("quantumcomputer"))}else{window.localStorage.setItem('quantumcomputer', 11500000);document.write(window.localStorage.getItem("quantumcomputer"))}</script><br> smarts
                 </h3>
             </div>
         </div>
     </div>
 
-
-
     <!--Scripts-->
-
-
 
     <!--Functions-->
     <script>
@@ -205,10 +218,6 @@
                 delay(1000).then(() => element.style.backgroundColor = 'black');
             }
         }
-
-
-
-
         function ApplyUpgrade(arrayOfUpgrades, arrayOfIDs, arrayOfImgs) {
             arrayOfUpgrades.forEach(upgrade => {
                 //upgrade = toString(upgrade);
@@ -216,13 +225,21 @@
                     var divID = arrayOfIDs[arrayOfUpgrades.indexOf(upgrade)]
                     var imgs = arrayOfImgs[arrayOfUpgrades.indexOf(upgrade)]
                     var stuff = document.getElementById("stuff");
-                    stuff.innerHTML = stuff.innerHTML + '<div id="' + divID + '" style="height: 100px; width: 100%; background-color: rgb(0, 61, 61); border-radius: 10px; border-color: black; border-width: 10; overflow: auto;"></div><hr>';
+                    stuff.innerHTML = stuff.innerHTML + '<div id="' + divID + '" style="height: 100px; width: 100%; background-color: rgb(0, 61, 61); border-radius: 10px; border-color: black; border-width: 10; overflow: hidden;"></div><hr>';
                     for (i = 0; i < window.localStorage.getItem(upgrade); i++) {
                         var el = document.getElementById(divID);
                         el.innerHTML = el.innerHTML + '<img style="margin-left: 20px; margin-right: 20px; margin-top: 10px;" src="' + imgs + '" width="25px" height="25px"/>'
                     }
                 }
             });
+        }
+        function check(price, id) {
+            if (parseInt(localStorage.getItem("smarts")) >= parseInt(localStorage.getItem(price))) {
+                document.getElementById(id).style.backgroundColor = "aqua"
+            }
+            else {
+                document.getElementById(id).style.backgroundColor = "gray"
+            }
         }
         function buy(price, upgradeDivID, owned, storagenameid, nprice, img, add) {
             localStorage.setItem("smarts", eval(localStorage.getItem("smarts") + "-" + localStorage.getItem(price)))
@@ -241,32 +258,25 @@
                 stuff.innerHTML = stuff.innerHTML + '<img style="margin-left: 20px; margin-right: 20px; margin-top: 10px;" src="' + img + '" width="25px" height="25px"/></div>';
                 window.localStorage.setItem(owned, eval(window.localStorage.getItem(owned) + "+1"))
             }
-            var newprice = eval("(50*" + localStorage.getItem(price) + ")/100")
+            var newprice = eval("(25*" + localStorage.getItem(price) + ")/100")
             window.localStorage.setItem(price, parseInt(localStorage.getItem(price)) + Math.round(newprice))
-            document.getElementById(nprice).innerHTML = window.localStorage.getItem(price) + ' smarts'
+            document.getElementById(nprice).innerHTML = window.localStorage.getItem(price) + '<br>smarts'
             if (localStorage.getItem("persec") == 0 || localStorage.getItem("persec") == null) {
                 localStorage.setItem("persec", add);
                 document.getElementById("sps").innerHTML = "<small>Per second: " + window.localStorage.getItem('persec') + "</small>"
             }
             else {
-                localStorage.setItem("persec", parseFloat(localStorage.getItem("persec")) + add)
+                localStorage.setItem("persec", parseFloat(localStorage.getItem("persec")) + ( add * parseInt(localStorage.getItem("totalsmarts"))) )
                 document.getElementById("sps").innerHTML = "<small>Per second: " + window.localStorage.getItem('persec') + "</small>"
             }
         }
-        function check(price, id) {
-            if (parseInt(localStorage.getItem("smarts")) >= parseInt(localStorage.getItem(price))) {
-                document.getElementById(id).style.backgroundColor = "aqua"
-            }
-            else {
-                document.getElementById(id).style.backgroundColor = "gray"
-            }
-        }
+
     </script>
     <!--Onload-->
     <script>
-        var aou = ['Calcassest', 'Gradeassest', 'Univassest', 'Teachassest', 'Profassest'];
-        var aoid = ['calculators', 'schoolers', 'univercers', 'teachers', 'professors'];
-        var aoimg = ['./assests/AdditionCalculator.png', './assests/gradeSchoolKid.png', './assests/univercityKid.png', "./assests/teacher.png", "./assests/professor.png"]
+        var aou = ['Calcassest', 'Gradeassest', 'Univassest', 'Teachassest', 'Profassest', 'Superassest', 'Quantassest'];
+        var aoid = ['calculators', 'schoolers', 'univercers', 'teachers', 'professors', 'supercomputers', 'quantumcomputers'];
+        var aoimg = ['./assests/AdditionCalculator.png', './assests/gradeSchoolKid.png', './assests/univercityKid.png', "./assests/teacher.png", "./assests/professor.png", "./assests/supercomputer.png", "./assests/quantumcomputer.png"]
         window.onload = function () {
             document.main.answer.focus();
             ApplyUpgrade(aou, aoid, aoimg);
@@ -291,8 +301,8 @@
             window.localStorage.setItem('univercity', 10000)
             window.localStorage.setItem('teacher', 100000)
             window.localStorage.setItem('professor', 1005000)
-            // document.getElementById('name').innerText = name+"'s brain"
-            // document.getElementById('smarts').innerText = window.localStorage.getItem('smarts')
+            window.localStorage.setItem('supercomputer', 8500000);
+            window.localStorage.setItem('quantumcomputer', 11500000)
         }
         document.getElementById('name').innerText = window.localStorage.getItem('name') + "'s brain"
         document.getElementById('smarts').innerText = Math.round(parseInt(localStorage.getItem("smarts")) * 10) / 10
@@ -330,6 +340,16 @@
                         buy("professor", "prof", "Profassest", "professors", "profprice", "./assests/professor.png", 7.3)
                     }
                     break;
+                case "super":
+                    if (eval(localStorage.getItem("smarts") + ">=" + localStorage.getItem("supercomputer"))) {
+                        buy("supercomputer", "super", "Superassest", "supercomputers", "superprice", "./assests/supercomputer.png", 9.5)
+                    }
+                    break;    
+                case "quant":
+                    if (eval(localStorage.getItem("smarts") + ">=" + localStorage.getItem("supercomputer"))) {
+                        buy("quantumcomputer", "quant", "Quantassest", "quantumcomputers", "quantprice", "./assests/quantumcomputer.png", 12)
+                    }       
+                    break;
             }
         }
     </script>
@@ -343,6 +363,7 @@
             check("univercity", "univ")
             check("teacher", "teach")
             check("professor", "prof")
+            check("supercomputer", "super")
         }
         setInterval(ps, 1000)
     </script>
