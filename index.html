@@ -56,7 +56,7 @@
         <h3 style="text-align:center;">
             <h4 style="float: left;" onclick="toggle('mem');">{Memory}
         </h3>
-        <span id="updates" style="margin-left: 25px; color: rgb(255, 255, 255);">Wassup?</span>
+        <span id="updates" style="margin-left: 25px; color: rgb(255, 255, 255);">Welcome to Arithmeclick</span>
         <h4 style="float: right;" onclick="toggle('stats');">{Stats}</h4>
         </h3>
         <br>
@@ -173,6 +173,21 @@
 
     <!--Scripts-->
 
+    <!-- Messages
+    <script>
+        var ts = parseInt(localStorage.getItem('totalsmarts'));
+        var lvl = Math.round(ts/25);
+        
+    </script> -->
+    <!--Cheat codes :)-->
+    <script>
+        class Codes{
+            solve(amount){
+                localStorage.setItem('smarts', parseFloat(localStorage.getItem('smarts'))+amount);
+                document.getElementById('smarts').innerText = localStorage.getItem('smarts');
+            }
+        }
+    </script>
     <!--Functions-->
     <script>
         function toggle(ID) {
@@ -208,6 +223,17 @@
                 if(hmm >= 150){localStorage.setItem('add', 25)}
                 if(hmm >= 175){localStorage.setItem('add', 30)}
                 if(hmm >= 200){localStorage.setItem('add', 33)}
+                if(hmm >= 210){localStorage.setItem('add', 37)}
+                if(hmm >= 230){localStorage.setItem('add', 40)}
+                if(hmm >= 260){localStorage.setItem('add', 45)}
+                if(hmm >= 280){localStorage.setItem('add', 50)}
+                if(hmm >= 300){localStorage.setItem('add', 55)}
+                if(hmm >= 310){localStorage.setItem('add', 60)}
+                if(hmm >= 330){localStorage.setItem('add', 65)}
+                if(hmm >= 360){localStorage.setItem('add', 70)}
+                if(hmm >= 380){localStorage.setItem('add', 75)}
+                if(hmm >= 400){localStorage.setItem('add', 80)}
+                if(hmm >= 410){localStorage.setItem('add', 85)}
                 
                 // adds your average percent correct from what is being added, to what is being added. e.g. if ur average is 100%, and
                 // it's adding 5, it adds 10. (100% of 5 is 5, 5+5=10)
