@@ -189,6 +189,10 @@
                 localStorage.setItem('smarts', parseFloat(localStorage.getItem('smarts'))+amount);
                 document.getElementById('smarts').innerText = localStorage.getItem('smarts');
             }
+            smarts(number){
+                localStorage.setItem('smarts', number);
+                document.getElementById('smarts').innerText = localStorage.getItem('smarts');
+            }
         }
         var Cheat = new Codes()
     </script>
