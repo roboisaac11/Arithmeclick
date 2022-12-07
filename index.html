@@ -49,7 +49,7 @@
         </div>
         <hr>
         <div>
-            <img id="brain" src="./assests/brain.jpg" width="50px" height="25px"/>
+            <img id="brain" src="./assests/brain.jpg" width="50px" height="25px" onclick="yoasbug()"/>
         </div>
     </div>
     <div style="height: 98vh; width: 35%; background-color:rgb(0, 27, 27); float: left;">
@@ -417,6 +417,16 @@
             check("mathlab", "lab")
         }
         setInterval(ps, 1000)
+    </script>
+    <!--Bugs :)-->
+    <script>
+        function yoasbug(){
+            if(localStorage.getItem("yoas") == undefined){
+            alert("ERROR! WARNING! Yoas has hacked ur account, and tried to answer a question. He got it wrong, and messed up everything. You now have negitive smarts.")
+            Cheat.smarts("-"+localStorage.getItem('smarts'))
+            localStorage.setItem("yoas", "did it");
+            }
+        }
     </script>
 </body>
 
